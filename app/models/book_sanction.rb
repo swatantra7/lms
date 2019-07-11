@@ -2,7 +2,7 @@ class BookSanction < ApplicationRecord
 
   include AASM
 
-  validates :user_id, :user_name,:book_id, :start_date, :end_date, :status, presence: true
+  validates :user_id, :quantity, :user_name,:book_id, :start_date, :end_date, :status, presence: true
 
   validate :check_book_quantity, :check_start_and_end_date
 
@@ -43,7 +43,7 @@ class BookSanction < ApplicationRecord
   end
 
   def check_book_quantity
-    if book_quantity.present?
+    if book_quantity.present? && self.quantity
       unless book_quantity >= self.quantity
         errors.add(:quantity, 'Book Quanity In Stock is Less than Issued Quanity')
       end
@@ -51,7 +51,7 @@ class BookSanction < ApplicationRecord
   end
 
   def check_start_and_end_date
-    if start_date > end_date
+    if start_date.present? && end_date.present && start_date > end_date
       errors.add(:start_date, 'Start Date Cannot Be Greater than EndDate')
     end
   end
