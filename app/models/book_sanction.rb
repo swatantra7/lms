@@ -1,0 +1,2 @@
+class BookSanction < ApplicationRecord
+end

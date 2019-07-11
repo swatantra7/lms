@@ -1,0 +1,12 @@
+/*
+*= require_tree .
+
+*= require bootstrap-table
+*= require bootstrap.min
+*= require bootstrap-datepicker
+*= require chosen
+*/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";

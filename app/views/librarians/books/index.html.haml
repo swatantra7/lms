@@ -1,0 +1,29 @@
+.space-20
+.pull-right
+  = link_to 'Create New Book Store', new_librarians_book_path,
+    class: 'btn btn-primary'
+.space-20
+.row
+  .col-md-12
+    .table-wrapper
+      .space-20
+      .table-responsive
+        %table.table.table-bordered.table-striped#bootstrap-table
+          %thead
+            %tr
+              %th{"data-sortable"=> "true"} Reference id
+              %th{"data-sortable"=> "true"} Name
+              %th{"data-sortable"=> "true"} Quantity
+              %th Edit
+          - @books.each do |book|
+            %tr
+              %td
+                = book.id
+              %td 
+                = book.name
+              %td 
+                = book.quantity
+              %td 
+                = link_to 'Edit', edit_librarians_book_path(book), 
+                class: "btn btn-primary m-r-5", 
+                :target =>"_blank"

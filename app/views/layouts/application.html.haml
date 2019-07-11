@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }/
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }/
+    %link{ crossorigin: 'anonymous', href: 'https://use.fontawesome.com/releases/v5.1.1/css/all.css',integrity: 'sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ', rel: 'stylesheet' }/
+    %title= 'Lms'
+    = csrf_meta_tags
+    = csp_meta_tag
+    = action_cable_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %body
+      %header.header
+        .container-fluid{style: "padding-right: 0px; padding-left: 0px;"}
+          - if user_signed_in?
+            .row
+              .col-md-6{style: "padding-top: 20px;"}
+                %label
+                  = "Welcome #{current_user.email}"
+              .col-md-6
+                .pull-right
+                  %ul.nav.navbar-nav
+                    %li.dropdown.header-profile#header-profile-picture
+                      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                        = render 'layouts/header_profile_picture'
+                      %ul.dropdown-menu
+                        %li.dropdown-item
+                          = link_to 'LOGOUT', destroy_user_session_path, method: :delete,
+                            data: { confirm: 'Are you sure you want to logout?' }
+            .row
+              = render 'layouts/navigation'
+      .content-body
+        - if notice
+          %p.alert.alert-success
+            = notice
+        - if alert
+          %p.alert.alert-danger
+            = alert
+        .container-fluid
+          = yield
+:javascript
+  $('ul.nav li.dropdown').hover(function() {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+  }, function() {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+  });

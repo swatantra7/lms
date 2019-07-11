@@ -1,0 +1,13 @@
+%nav.main-nav.navbar.navbar-default.navbar-color
+  .container
+    .navbar-header
+      %button.navbar-toggle
+        %span.sr-only
+          | Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    #navbar-collapse.navbar-collapse.collapse
+      - if current_user.librarian?
+        = render_navigation  context: :librarian, level: 1..2, expand_all: true, renderer: :bootstrap
+      
