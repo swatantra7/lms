@@ -51,7 +51,7 @@ class BookSanction < ApplicationRecord
   end
 
   def check_start_and_end_date
-    if start_date.present? && end_date.present && start_date > end_date
+    if start_date.present? && end_date.present? && start_date > end_date
       errors.add(:start_date, 'Start Date Cannot Be Greater than EndDate')
     end
   end

@@ -19,8 +19,13 @@ class Librarians::BookSanctionsController < LibrariansController
 
   def cancel
     @book_sanction = BookSanction.find(params[:id])
-    @book_sanction.cancel!
-    redirect_to librarians_book_sanctions_path
+    if @book_sanction.cancel!
+      flash[:notice] = 'Sanctioned Cancelled Successfully'
+      redirect_to librarians_book_sanctions_path
+    else
+      flash[:alert] = "Sanctioned Not Cancelled due to errors #{@book_sanction.errors.full_messages.join}"
+      redirect_to librarians_book_sanctions_path
+    end
   end
 
   private
