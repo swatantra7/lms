@@ -33,4 +33,5 @@
               %td
                 = book_sanction.end_date
               %td
-                = 'Cancel'
+              - if book_sanction.can_cancel?
+                = link_to 'cancel', cancel_librarians_book_sanction_path(book_sanction), class: 'btn btn-danger btn-sm'

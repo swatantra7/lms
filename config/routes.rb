@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   namespace :librarians do
 
     resources :books
-    resources :book_sanctions, only: [:index, :new, :create]
+    resources :book_sanctions, only: [:index, :new, :create] do
+      member do
+        put :cancel
+      end
+    end
 
   end
 

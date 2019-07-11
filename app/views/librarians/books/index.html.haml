@@ -22,7 +22,7 @@
               %td 
                 = book.name
               %td 
-                = book.quantity
+                = "#{book.total_quantity} out of #{book.quantity}"
               %td 
                 = link_to 'Edit', edit_librarians_book_path(book), 
                 class: "btn btn-primary m-r-5", 

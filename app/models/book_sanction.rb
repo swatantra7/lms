@@ -23,6 +23,9 @@ class BookSanction < ApplicationRecord
 
   after_save :calculate_remaining_quantity
 
+  def can_cancel?
+    self.start_date < Date.today
+  end
 
   private
 
@@ -30,6 +33,5 @@ class BookSanction < ApplicationRecord
     book.quantity = book.quantity - quantity
     book.save
   end
-
 
 end

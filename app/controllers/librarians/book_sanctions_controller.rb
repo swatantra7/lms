@@ -18,7 +18,8 @@ class Librarians::BookSanctionsController < LibrariansController
   end
 
   def cancel
-
+    @book_sanction = BookSanction.find(params[:id])
+    @book_sanction.cancel!
   end
 
   private
