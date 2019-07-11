@@ -1,0 +1,34 @@
+.text-center
+  %h4
+  .row
+    .col-md-9.col-md-offset-1
+      = bootstrap_form_for [:librarians, @book_sanction],  layout: :horizontal,
+          label_col: 'col-md-3', control_col: 'col-md-7' do |f|
+        .space-20
+          %label.col-md-3.control-label.required{style: "padding-left: 1px;"}
+            = 'Book'
+          .col-md-9
+            = f.collection_select(:book_id, Book.all, :id, :name,  hide_label: true, class: 'form-control chosen-select')
+          .col-md-12
+            = f.number_field :quantity, class: "form-control col-md-2"
+          .col-md-12
+            = f.text_field :user_name, class: "form-control col-md-2"
+          .col-md-6
+            = f.text_field :start_date, class: "form-control  dob col-md-2 datepicker", label: 'Start Date'
+          .col-md-6
+            = f.text_field :end_date, class: "form-control  dob col-md-2 datepicker", label: 'End Date'
+            .clearfix
+        .clearfix
+        .form-group
+          = link_to 'cancel', librarians_book_sanctions_path, class: 'btn btn-danger btn-sm'
+          &nbsp;
+          = f.submit 'Add Book', class: 'btn btn-primary'
+
+:javascript
+  $('.datepicker').datepicker({
+    format: 'yyyy/mm/dd',
+    startDate: '1987/01/01',
+    forceParse: false,
+    autoclose: true,
+    todayHighlight: true
+  });

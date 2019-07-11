@@ -31,7 +31,9 @@ gem 'simple-navigation-bootstrap'
 
 gem 'jquery-rails'
 
-gem 'bootstrap_form' 
+gem 'bootstrap_form'
+
+gem 'aasm', '5.0'
 
 gem 'bootstrap-sass', '~> 3.4.1'
 # Use Redis adapter to run Action Cable in production

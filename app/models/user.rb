@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books
+  has_many :book_sanctions
+  
   belongs_to :role
 
   delegate :name, to: :role, allow_nil: true, prefix: true

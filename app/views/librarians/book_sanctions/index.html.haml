@@ -1,0 +1,36 @@
+.space-20
+.pull-right
+  = link_to 'Issue New Book', new_librarians_book_sanction_path,
+    class: 'btn btn-primary'
+.space-20
+.row
+  .col-md-12
+    .table-wrapper
+      .space-20
+      .table-responsive
+        %table.table.table-bordered.table-striped#bootstrap-table
+          %thead
+            %tr
+              %th{"data-sortable"=> "true"} Reference id
+              %th{"data-sortable"=> "true"} Name
+              %th{"data-sortable"=> "true"} Quantity
+              %th{"data-sortable"=> "true"} Status
+              %th{"data-sortable"=> "true"} Start Date
+              %th{"data-sortable"=> "true"} End Date
+              %th Cancel
+          - @book_sanctions.each do |book_sanction|
+            %tr
+              %td
+                = book_sanction.id
+              %td
+                = book_sanction.book_name
+              %td
+                = book_sanction.quantity
+              %td
+                = book_sanction.status
+              %td
+                = book_sanction.start_date
+              %td
+                = book_sanction.end_date
+              %td
+                = 'Cancel'
