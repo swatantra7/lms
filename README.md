@@ -3,22 +3,35 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+LMS is a platform where you can manage your Book, Issue Book To User
+# System Dependencies
 
-* Ruby version
+* OS - Ubuntu 16.04/higher OR CentOS 6/7
+* RVM
+* Ruby 2.4.1
+* Rails 5.2.3
+* Git 2.16.3 or latest version
+* DB- SqlLite
 
-* System dependencies
+# App Setup
 
-* Configuration
+Execute following rake:
+* rake lms:install RAILS_ENV=XXXX
 
-* Database creation
+This rake will execute all required DB migrations for App setup with seed data.
+### Seed Data - Following Records will get created with above rake
+1. Roles
 
-* Database initialization
+# Config Files
+Need to add following configuration files in directory app/config:
+* config/secrets.yml
 
-* How to run the test suite
+For more detail please check 'yml.example' in app directory.
 
-* Services (job queues, cache servers, search engines, etc.)
+Use following rake to generate secret keys -
+* rake secrets
 
-* Deployment instructions
+# Background Jobs
 
-* ...
+No background jobs added yet.
+

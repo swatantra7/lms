@@ -4,10 +4,13 @@ class BookSanction < ApplicationRecord
 
   validates :user_id, :user_name,:book_id, :start_date, :end_date, :status, presence: true
 
+  validate :check_book_quantity
+
   belongs_to :user
   belongs_to :book
 
   delegate :name, to: :book, prefix: true, allow_nil: true
+  delegate :quantity, to: :book, prefix: true, allow_nil: true
 
 
   aasm column: :status, whiny_transitions: false do
@@ -15,7 +18,7 @@ class BookSanction < ApplicationRecord
     state :sanctioned, initial: true
     state :cancelled
 
-    event :cancel do
+    event :cancel, after: :recalculate_remaining_quantity do
       transitions from: :sanctioned, to: :cancelled
     end
 
@@ -24,14 +27,25 @@ class BookSanction < ApplicationRecord
   after_save :calculate_remaining_quantity
 
   def can_cancel?
-    self.start_date < Date.today
+    self.sanctioned? && self.start_date > Date.today
   end
 
   private
 
+  def recalculate_remaining_quantity
+    book.quantity = book.quantity + quantity
+    book.save
+  end
+
   def calculate_remaining_quantity
     book.quantity = book.quantity - quantity
     book.save
+  end
+
+  def check_book_quantity
+    unless book_quantity >= self.quantity
+      errors.add(:quantity, 'Book Quanity In Stock is Less than Issued Quanity')
+    end
   end
 
 end

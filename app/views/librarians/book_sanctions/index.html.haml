@@ -32,6 +32,6 @@
                 = book_sanction.start_date
               %td
                 = book_sanction.end_date
-              %td
               - if book_sanction.can_cancel?
-                = link_to 'cancel', cancel_librarians_book_sanction_path(book_sanction), class: 'btn btn-danger btn-sm'
+                %td
+                  = link_to 'cancel', cancel_librarians_book_sanction_path(book_sanction), method: :put, class: 'btn btn-danger btn-sm'

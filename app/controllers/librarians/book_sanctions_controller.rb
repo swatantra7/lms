@@ -20,6 +20,7 @@ class Librarians::BookSanctionsController < LibrariansController
   def cancel
     @book_sanction = BookSanction.find(params[:id])
     @book_sanction.cancel!
+    redirect_to librarians_book_sanctions_path
   end
 
   private
