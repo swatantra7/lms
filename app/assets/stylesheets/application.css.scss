@@ -5,8 +5,10 @@
 *= require bootstrap.min
 *= require bootstrap-datepicker
 *= require chosen
+*= require lms
 */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import 'lms';

@@ -8,7 +8,7 @@
           %label.col-md-3.control-label.required{style: "padding-left: 1px;"}
             = 'Book'
           .col-md-9
-            = f.collection_select(:book_id, Book.all, :id, :name,  hide_label: true, class: 'form-control chosen-select')
+            = f.collection_select(:book_id, Book.sanctionable, :id, :name,  hide_label: true, class: 'form-control chosen-select')
           .col-md-12
             = f.number_field :quantity, class: "form-control col-md-2"
           .col-md-12

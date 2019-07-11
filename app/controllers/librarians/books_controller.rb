@@ -1,6 +1,6 @@
 class Librarians::BooksController < LibrariansController
 
-  before_action :find_book, only: [:edit, :show, :update]
+  before_action :find_book, only: [:edit, :show, :update, :destroy]
 
   def index
     @books = Book.all
@@ -33,8 +33,16 @@ class Librarians::BooksController < LibrariansController
   end
 
   def destroy
-    @book.destroy
-    redirect_to librarians_books_path
+    if @book.book_sanctions.present?
+      redirect_to librarians_books_path, alert: 'Opps Cannot Destroy, Book Is Already Issued to SomeOne!!!'
+    else
+      if @book.destroy
+        flash[:notice] = 'Book deleted Successfully'
+        redirect_to librarians_books_path
+      else
+        redirect_to librarians_books_path, alert: @book.errors.full_messages.join
+      end
+    end
   end
 
   private

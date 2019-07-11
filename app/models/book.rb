@@ -8,8 +8,10 @@ class Book < ApplicationRecord
 
   belongs_to :user
 
+  scope :sanctionable, -> { where("quantity > ?", 0) }
+
   def total_quantity
-    book_sanctions.sanctioned.sum(:quantity)
+    quantity + book_sanctions.sanctioned.sum(:quantity)
   end
 
 end

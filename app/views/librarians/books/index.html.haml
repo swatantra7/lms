@@ -13,8 +13,8 @@
             %tr
               %th{"data-sortable"=> "true"} Reference id
               %th{"data-sortable"=> "true"} Name
-              %th{"data-sortable"=> "true"} Quantity
-              %th Edit
+              %th{"data-sortable"=> "true"} Quantity(Remaining Book/Total Book)
+              %th action
           - @books.each do |book|
             %tr
               %td
@@ -22,8 +22,10 @@
               %td 
                 = book.name
               %td 
-                = "#{book.total_quantity} out of #{book.quantity}"
+                = "#{book.quantity} out of #{book.total_quantity}"
               %td 
                 = link_to 'Edit', edit_librarians_book_path(book), 
                 class: "btn btn-primary m-r-5", 
                 :target =>"_blank"
+                = link_to 'Delete', librarians_book_path(book), method: :delete, data: {confirm: 'Are You confirm ?'},
+                class: "btn btn-danger m-r-5"

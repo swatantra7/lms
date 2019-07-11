@@ -4,7 +4,7 @@ class BookSanction < ApplicationRecord
 
   validates :user_id, :user_name,:book_id, :start_date, :end_date, :status, presence: true
 
-  validate :check_book_quantity
+  validate :check_book_quantity, :check_start_and_end_date
 
   belongs_to :user
   belongs_to :book
@@ -43,8 +43,16 @@ class BookSanction < ApplicationRecord
   end
 
   def check_book_quantity
-    unless book_quantity >= self.quantity
-      errors.add(:quantity, 'Book Quanity In Stock is Less than Issued Quanity')
+    if book_quantity.present?
+      unless book_quantity >= self.quantity
+        errors.add(:quantity, 'Book Quanity In Stock is Less than Issued Quanity')
+      end
+    end
+  end
+
+  def check_start_and_end_date
+    if start_date > end_date
+      errors.add(:start_date, 'Start Date Cannot Be Greater than EndDate')
     end
   end
 
