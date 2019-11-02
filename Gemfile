@@ -23,7 +23,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-gem 'devise', '4.5.0'
+gem 'devise', '4.7.1'
 
 gem 'haml', '~> 5.0', '>= 5.0.4'
 
